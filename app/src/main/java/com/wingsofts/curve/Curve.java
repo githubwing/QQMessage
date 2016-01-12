@@ -23,7 +23,7 @@ public class Curve extends View {
     private float mCircleRadius = 30;
     private float mMoveCircleRadius = mCircleRadius;
     private float mSupX;
-    private float mSupY = mCircleY;
+    private float mSupY ;
 
     private float lastY;
     private boolean isUp;
@@ -52,14 +52,14 @@ public class Curve extends View {
         p.setColor(Color.RED);
         p.setStyle(Paint.Style.FILL);
         p.setStrokeWidth(mPaintStrokeWidth);
-
+        mSupY = mCircleY +(mMoveCircleY-mCircleY)/2;
         if(isCanDraw) {
-            if ((mMoveCircleY-mCircleY)<mMoveCircleRadius*4) {
+            if ((mMoveCircleY-mCircleY)<mMoveCircleRadius*3) {
                 Log.e("wing",mSupY-mCircleY+"");
                 Path path = new Path();
                 //左边的线
                 path.moveTo(mCircleX - mCircleRadius + mPaintStrokeWidth / 2, mCircleY);
-                path.quadTo(mCircleX, mSupY, mCircleX - mMoveCircleRadius + mPaintStrokeWidth / 2, mMoveCircleY);
+                path.quadTo(mCircleX , mSupY, mCircleX - mMoveCircleRadius + mPaintStrokeWidth / 2, mMoveCircleY);
                 path.lineTo(mCircleX + mMoveCircleRadius, mMoveCircleY);
                 path.quadTo(mCircleX, mSupY, mCircleX + mCircleRadius, mCircleY);
                 path.lineTo(mCircleX - mCircleRadius, mCircleY);
@@ -111,7 +111,7 @@ public class Curve extends View {
                 break;
 
             case MotionEvent.ACTION_UP:
-                if((mMoveCircleY-mCircleY)>mMoveCircleRadius*4){
+                if((mMoveCircleY-mCircleY)>mMoveCircleRadius*3){
 
                     Log.e("wing","超过");
                     isCanDraw = false;
